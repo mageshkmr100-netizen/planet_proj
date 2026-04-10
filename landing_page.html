@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Planet Ceres | Mystic Realm of Wonders</title>
+    <!-- Google Fonts & Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Swiper JS for carousel -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <style>
+        /* Custom animations and magical glow effects */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes pulseGlow {
+            0% { text-shadow: 0 0 0px rgba(255,215,0,0.3); }
+            100% { text-shadow: 0 0 20px rgba(255,215,0,0.8); }
+        }
+        @keyframes slowSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .floating-orb {
+            animation: float 6s ease-in-out infinite;
+        }
+        .magic-text {
+            animation: pulseGlow 2s ease-in-out infinite alternate;
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(45,20,70,0.8) 100%), url('https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&w=1600');
+            background-size: cover;
+            background-position: center;
+        }
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .card-hover:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 30px 40px -20px rgba(0,0,0,0.5), 0 0 25px rgba(255,215,0,0.3);
+        }
+        body {
+            scroll-behavior: smooth;
+        }
+        .modal-transition {
+            transition: all 0.3s ease;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e1029;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #b873ff;
+            border-radius: 10px;
+        }
+        .section-bg {
+            background: radial-gradient(circle at 20% 30%, #120b1a, #0a0712);
+        }
+    </style>
+</head>
+<body class="bg-[#0b0712] text-gray-200 font-sans overflow-x-hidden">
+
+    <!-- Main Wrapper -->
+    <div class="relative">
+        
+        <!-- Navigation Bar -->
+        <nav class="bg-black/60 backdrop-blur-xl border-b border-purple-500/30 sticky top-0 z-50 py-3 px-6 md:px-12 flex flex-wrap items-center justify-between">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-moon-stars text-3xl text-yellow-300 floating-orb"></i>
+                <span class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">✨ C E R E S ✨</span>
+            </div>
+            <div class="flex flex-wrap justify-center gap-4 text-sm md:text-base">
+                <a href="#about-planet" class="hover:text-purple-300 transition"><i class="fas fa-globe-asia mr-1"></i> Planet</a>
+                <a href="#civilization" class="hover:text-purple-300 transition"><i class="fas fa-users mr-1"></i> Civilization</a>
+                <a href="#currency" class="hover:text-purple-300 transition"><i class="fas fa-coins mr-1"></i> Currency</a>
+                <a href="#economy" class="hover:text-purple-300 transition"><i class="fas fa-chart-line mr-1"></i> Economy</a>
+                <a href="#tourism" class="hover:text-purple-300 transition"><i class="fas fa-umbrella-beach mr-1"></i> Tourism</a>
+                <a href="#education" class="hover:text-purple-300 transition"><i class="fas fa-graduation-cap mr-1"></i> Education</a>
+            </div>
+            <div class="flex gap-2">
+                <button id="openMemberBtn" class="bg-purple-700 hover:bg-purple-500 px-4 py-1.5 rounded-full text-sm font-semibold shadow-lg transition"><i class="fas fa-user-plus mr-1"></i> Join / Login</button>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <div class="relative h-[85vh] flex items-center justify-center text-center hero-bg bg-fixed">
+            <div class="absolute inset-0 bg-black/40"></div>
+            <div class="relative z-10 px-6 max-w-4xl">
+                <i class="fas fa-crown text-6xl text-yellow-300 mb-4 floating-orb"></i>
+                <h1 class="text-5xl md:text-7xl font-extrabold magic-text bg-gradient-to-r from-amber-200 to-purple-300 bg-clip-text text-transparent">Welcome to Planet Ceres</h1>
+                <p class="text-xl md:text-2xl mt-6 text-gray-200 drop-shadow-lg">Where magic breathes, creatures speak, and every soul finds their legend.</p>
+                <div class="mt-8 flex justify-center gap-5">
+                    <button id="exploreCarouselBtn" class="bg-purple-600 hover:bg-purple-500 px-8 py-3 rounded-full font-bold shadow-2xl transition"><i class="fas fa-dragon mr-2"></i> Explore Wonders</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carousel Section -->
+        <div class="py-16 bg-gradient-to-b from-[#120b1a] to-[#0a0712]" id="carouselSection">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-12"><i class="fas fa-film mr-3 text-purple-400"></i> Mystic Visions of Ceres</h2>
+                <div class="swiper mySwiper rounded-2xl overflow-hidden shadow-2xl">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide relative">
+                            <img src="https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Planet Ceres Landscape" class="w-full h-[450px] object-cover brightness-90">
+                            <div class="absolute bottom-0 left-0 bg-black/70 p-5 w-full"><h3 class="text-2xl font-bold">🌍 The Living Planet</h3><p>Crystalline forests & floating islands</p></div>
+                        </div>
+                        <div class="swiper-slide relative">
+                            <img src="https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Civilization" class="w-full h-[450px] object-cover brightness-90">
+                            <div class="absolute bottom-0 left-0 bg-black/70 p-5 w-full"><h3 class="text-2xl font-bold">🏰 Lumina Civilization</h3><p>Elves, Draconians & Etherials in harmony</p></div>
+                        </div>
+                        <div class="swiper-slide relative">
+                            <img src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Currency" class="w-full h-[450px] object-cover brightness-90">
+                            <div class="absolute bottom-0 left-0 bg-black/70 p-5 w-full"><h3 class="text-2xl font-bold">💎 Stardust Credits</h3><p>Crystalline coins that glow with mana</p></div>
+                        </div>
+                        <div class="swiper-slide relative">
+                            <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Economy" class="w-full h-[450px] object-cover brightness-90">
+                            <div class="absolute bottom-0 left-0 bg-black/70 p-5 w-full"><h3 class="text-2xl font-bold">📈 Arcane Market</h3><p>Trade of rare spells & magical artifacts</p></div>
+                        </div>
+                        <div class="swiper-slide relative">
+                            <img src="https://images.pexels.com/photos/457882/pexels-photo-457882.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Tourism" class="w-full h-[450px] object-cover brightness-90">
+                            <div class="absolute bottom-0 left-0 bg-black/70 p-5 w-full"><h3 class="text-2xl font-bold">🏝️ Starfall Beaches</h3><p>Glowing tides & singing sirens</p></div>
+                        </div>
+                        <div class="swiper-slide relative">
+                            <img src="https://images.pexels.com/photos/207896/pexels-photo-207896.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Education" class="w-full h-[450px] object-cover brightness-90">
+                            <div class="absolute bottom-0 left-0 bg-black/70 p-5 w-full"><h3 class="text-2xl font-bold">📜 Arcanum Academy</h3><p>Schools of elemental mastery</p></div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next text-white"></div>
+                    <div class="swiper-button-prev text-white"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Cards -->
+        <div class="py-20 px-6 section-bg" id="about-planet">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-14"><i class="fas fa-star-of-life text-yellow-400"></i> Realms of Wonder</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-7">
+                    <div class="card-hover bg-gradient-to-br from-purple-900/40 to-indigo-900/40 backdrop-blur-sm rounded-2xl p-5 border border-purple-500/30 text-center">
+                        <div class="w-28 h-28 mx-auto rounded-full overflow-hidden border-4 border-yellow-500/60 mb-4 shadow-xl">
+                            <img src="https://images.pexels.com/photos/2478248/pexels-photo-2478248.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Mythical Dragon" class="w-full h-full object-cover">
+                        </div>
+                        <h5 class="text-xl font-bold mt-2">✨ Mythical Creatures</h5>
+                        <p class="text-sm text-gray-300 mt-2">Dragons, Phoenixes, Lumina Foxes and Celestial Serpents roam free.</p>
+                        <button class="know-more-btn mt-4 bg-amber-700/60 hover:bg-amber-600 px-4 py-2 rounded-full text-sm w-full transition" data-info="creatures">Know more <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                    <div class="card-hover bg-gradient-to-br from-purple-900/40 to-indigo-900/40 backdrop-blur-sm rounded-2xl p-5 border border-purple-500/30 text-center">
+                        <div class="w-28 h-28 mx-auto rounded-full overflow-hidden border-4 border-yellow-500/60 mb-4">
+                            <img src="https://images.pexels.com/photos/114907/pexels-photo-114907.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Magic Powers" class="w-full h-full object-cover">
+                        </div>
+                        <h5 class="text-xl font-bold">🔮 Elemental Sorcery</h5>
+                        <p class="text-sm text-gray-300">Manipulate fire, water, aether & time magic inherited from stars.</p>
+                        <button class="know-more-btn mt-4 bg-amber-700/60 hover:bg-amber-600 px-4 py-2 rounded-full text-sm w-full" data-info="powers">Know more</button>
+                    </div>
+                    <div class="card-hover bg-gradient-to-br from-purple-900/40 to-indigo-900/40 backdrop-blur-sm rounded-2xl p-5 border border-purple-500/30 text-center">
+                        <div class="w-28 h-28 mx-auto rounded-full overflow-hidden border-4 border-yellow-500/60 mb-4">
+                            <img src="https://images.pexels.com/photos/110854/pexels-photo-110854.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Crystal Trees" class="w-full h-full object-cover">
+                        </div>
+                        <h5 class="text-xl font-bold">🌿 Whispering Woods</h5>
+                        <p class="text-sm text-gray-300">Forests of singing crystals and sentient vines that grant wishes.</p>
+                        <button class="know-more-btn mt-4 bg-amber-700/60 hover:bg-amber-600 px-4 py-2 rounded-full text-sm w-full" data-info="flora">Know more</button>
+                    </div>
+                    <div class="card-hover bg-gradient-to-br from-purple-900/40 to-indigo-900/40 backdrop-blur-sm rounded-2xl p-5 border border-purple-500/30 text-center">
+                        <div class="w-28 h-28 mx-auto rounded-full overflow-hidden border-4 border-yellow-500/60 mb-4">
+                            <img src="https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Floating City" class="w-full h-full object-cover">
+                        </div>
+                        <h5 class="text-xl font-bold">🏙️ Aethoria City</h5>
+                        <p class="text-sm text-gray-300">Floating metropolis built on clouds & ancient runestones.</p>
+                        <button class="know-more-btn mt-4 bg-amber-700/60 hover:bg-amber-600 px-4 py-2 rounded-full text-sm w-full" data-info="city">Know more</button>
+                    </div>
+                    <div class="card-hover bg-gradient-to-br from-purple-900/40 to-indigo-900/40 backdrop-blur-sm rounded-2xl p-5 border border-purple-500/30 text-center">
+                        <div class="w-28 h-28 mx-auto rounded-full overflow-hidden border-4 border-yellow-500/60 mb-4">
+                            <img src="https://images.pexels.com/photos/1205301/pexels-photo-1205301.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Portal" class="w-full h-full object-cover">
+                        </div>
+                        <h5 class="text-xl font-bold">🌀 Void Gates</h5>
+                        <p class="text-sm text-gray-300">Travel across dimensions & meet creatures from forgotten realms.</p>
+                        <button class="know-more-btn mt-4 bg-amber-700/60 hover:bg-amber-600 px-4 py-2 rounded-full text-sm w-full" data-info="portals">Know more</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Sections for Nav -->
+        <div id="civilization" class="py-16 px-6 border-t border-purple-500/20">
+            <div class="max-w-5xl mx-auto text-center"><h2 class="text-3xl font-bold"><i class="fas fa-users"></i> The Great Civilizations</h2><p class="mt-4 text-gray-300">Five sentient species coexist: High Elves, Dwarven Smiths, Draconians, Sylph Riders, and the mysterious Voidwalkers.</p></div>
+        </div>
+        <div id="currency" class="py-16 px-6 bg-purple-900/10"><div class="max-w-5xl mx-auto text-center"><h2 class="text-3xl font-bold"><i class="fas fa-coins"></i> Stardust Credits</h2><p class="mt-4">Glowing crystalline coins infused with raw mana — accepted across all 12 realms.</p></div></div>
+        <div id="economy" class="py-16 px-6"><div class="max-w-5xl mx-auto text-center"><h2 class="text-3xl font-bold"><i class="fas fa-chart-line"></i> Arcane Economy</h2><p class="mt-4">Trade of spell components, enchanted artifacts, and magical essence fuels our interdimensional market.</p></div></div>
+        <div id="tourism" class="py-16 px-6 bg-purple-900/10"><div class="max-w-5xl mx-auto text-center"><h2 class="text-3xl font-bold"><i class="fas fa-umbrella-beach"></i> Tourist Wonders</h2><p class="mt-4">Visit the singing crystal caves, ride phoenix-back, or bathe in the healing starlight pools.</p></div></div>
+        <div id="education" class="py-16 px-6"><div class="max-w-5xl mx-auto text-center"><h2 class="text-3xl font-bold"><i class="fas fa-graduation-cap"></i> Arcanum Academy</h2><p class="mt-4">Learn elemental magic, cosmic history, and mythical creature linguistics from grand masters.</p></div></div>
+
+        <!-- Footer -->
+        <footer class="bg-black/70 border-t border-purple-800/40 py-8 text-center text-gray-400 text-sm">
+            <div class="container mx-auto">
+                <i class="fas fa-glasses text-purple-400 mr-2"></i> Planet Ceres Council of Mystics © 2026 — All magical rights reserved.<br>
+                <span class="text-xs">✨ Join the legend. Become a citizen or tourist today ✨</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal Overlay (Hidden by default) -->
+    <div id="authModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm hidden transition-all duration-300">
+        <div class="bg-[#1a1227] w-full max-w-md rounded-2xl shadow-2xl border border-purple-500/50 p-6 relative mx-4">
+            <button id="closeModalBtn" class="absolute top-3 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
+            <div class="flex gap-4 mb-6 border-b border-purple-500/30 pb-2">
+                <button id="tabLoginBtn" class="text-lg font-semibold px-4 py-1 rounded-t-lg transition text-purple-300 border-b-2 border-purple-400">🔐 Login</button>
+                <button id="tabRegisterBtn" class="text-lg font-semibold px-4 py-1 rounded-t-lg transition text-gray-400">✨ Register</button>
+            </div>
+            <div id="loginFormContainer">
+                <form id="loginFormElement">
+                    <input type="text" id="loginUsername" placeholder="Username / Magical ID" class="w-full bg-[#2e1d3e] border border-purple-400/40 rounded-xl p-3 mb-4 text-white focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    <input type="password" id="loginPassword" placeholder="Password (spellbound)" class="w-full bg-[#2e1d3e] border border-purple-400/40 rounded-xl p-3 mb-2 text-white focus:outline-none">
+                    <p id="loginError" class="text-red-400 text-sm mb-3"></p>
+                    <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 py-3 rounded-xl font-bold text-white transition"><i class="fas fa-meteor mr-2"></i> Enter Ceres</button>
+                </form>
+                <p class="text-center text-gray-400 text-xs mt-4">✨ Existing residents & tourist visa holders ✨</p>
+            </div>
+            <div id="registerFormContainer" class="hidden">
+                <form id="registerFormElement">
+                    <input type="text" id="regUsername" placeholder="Full name / Mystic alias" class="w-full bg-[#2e1d3e] border border-purple-400/40 rounded-xl p-3 mb-4 text-white focus:outline-none">
+                    <input type="tel" id="regMobile" placeholder="Interstellar Mobile (10 digits)" class="w-full bg-[#2e1d3e] border border-purple-400/40 rounded-xl p-3 mb-4 text-white focus:outline-none">
+                    <input type="password" id="regPassword" placeholder="Create a magical password" class="w-full bg-[#2e1d3e] border border-purple-400/40 rounded-xl p-3 mb-2 text-white focus:outline-none">
+                    <p id="regError" class="text-red-400 text-sm mb-3"></p>
+                    <button type="submit" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 py-3 rounded-xl font-bold text-white transition"><i class="fas fa-passport mr-2"></i> Register as Citizen / Tourist</button>
+                </form>
+                <p class="text-center text-gray-400 text-xs mt-4">🏝️ Get your visa & earn 100 welcome Stardust Credits</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Carousel initialization
+        const swiper = new Swiper('.mySwiper', {
+            loop: true,
+            autoplay: { delay: 3500, disableOnInteraction: false },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+            speed: 800,
+        });
+
+        // Know More Buttons
+        const infoMap = {
+            creatures: "✨ Mythical Creatures: Star-Dragons, Crystal Phoenixes, Void Foxes. They guard ancient temples and speak the old tongue.",
+            powers: "🔮 Elemental Magic: Master fire, water, earth, air, aether, and chronomancy after training at Arcanum Academy.",
+            flora: "🌿 Whispering Woods: Trees sing lullabies, bioluminescent fungi reveal hidden paths, Wishblossom blooms once per century.",
+            city: "🏙️ Aethoria City: Floating on Ether Cores, home to the Grand Bazaar where spells and artifacts are traded.",
+            portals: "🌀 Void Gates: Ancient portals connecting Ceres to 7 parallel realms. Return before moonrise!"
+        };
+        document.querySelectorAll('.know-more-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const key = btn.getAttribute('data-info');
+                alert(infoMap[key] || "🌌 The mystics whisper secrets of this realm...");
+            });
+        });
+
+        document.getElementById('exploreCarouselBtn')?.addEventListener('click', () => {
+            document.getElementById('carouselSection').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Smooth scroll for nav
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId && targetId !== "#") {
+                    const targetEl = document.querySelector(targetId);
+                    if(targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Modal controls (delegated to auth.js but also basic open)
+        const modal = document.getElementById('authModal');
+        document.getElementById('openMemberBtn').onclick = () => modal.classList.remove('hidden');
+        document.getElementById('closeModalBtn').onclick = () => modal.classList.add('hidden');
+        modal.onclick = (e) => { if(e.target === modal) modal.classList.add('hidden'); };
+        
+        // Tab switching inside modal
+        const tabLogin = document.getElementById('tabLoginBtn');
+        const tabRegister = document.getElementById('tabRegisterBtn');
+        const loginContainer = document.getElementById('loginFormContainer');
+        const registerContainer = document.getElementById('registerFormContainer');
+        tabLogin.onclick = () => {
+            loginContainer.classList.remove('hidden');
+            registerContainer.classList.add('hidden');
+            tabLogin.classList.add('border-b-2', 'border-purple-400', 'text-purple-300');
+            tabRegister.classList.remove('border-b-2', 'border-purple-400', 'text-purple-300');
+            tabRegister.classList.add('text-gray-400');
+            tabLogin.classList.remove('text-gray-400');
+        };
+        tabRegister.onclick = () => {
+            registerContainer.classList.remove('hidden');
+            loginContainer.classList.add('hidden');
+            tabRegister.classList.add('border-b-2', 'border-purple-400', 'text-purple-300');
+            tabLogin.classList.remove('border-b-2', 'border-purple-400', 'text-purple-300');
+            tabLogin.classList.add('text-gray-400');
+            tabRegister.classList.remove('text-gray-400');
+        };
+    </script>
+</body>
+</html>
